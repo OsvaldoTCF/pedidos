@@ -48,11 +48,6 @@ type
 
   TPedidoItemsList = specialize TFPGObjectList<TPedidoItem>;
 
-  TPedidoItemsOpf = class(specialize TdGSQLdbOpf<TPedidoItemsList>)
-  public
-//    constructor Create; overload;
-  end;
-
   TPedido = class
     FData: tdatetime;
     FCliente: TCliente;
@@ -62,7 +57,14 @@ type
       property PedidoItems: TPedidoItemsList read FPedidoItems write FPedidoItems;
   end;
 
+
+
   TProdutoOpf = class(specialize TdGSQLdbOpf<TProduto>)
+  public
+//    constructor Create; overload;
+  end;
+
+   TPedidoItemsOpf = class(specialize TdGSQLdbOpf<TPedidoItemsList>)
   public
 //    constructor Create; overload;
   end;
@@ -70,7 +72,7 @@ type
   TPedidoOpf = class(specialize TdGSQLdbOpf<TPedido>)
   public
 //    constructor Create; overload;
-  property PedidoItemsOpf: TPedidoItemsOpf read PedidoItems;
+  property PedidoItemsOpf: TPedidoItemsOpf read FPedidoItems;
   end;
 
 
