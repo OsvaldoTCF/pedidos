@@ -59,7 +59,7 @@ type
     FValor: Currency;
     FPedidoItems: TPedidoItemsList;
     public
-  property PedidoItemsOpf: TPedidoItemsOpf read FPedidoItems;
+      property PedidoItems: TPedidoItemsList read FPedidoItems write FPedidoItems;
   end;
 
   TProdutoOpf = class(specialize TdGSQLdbOpf<TProduto>)
@@ -70,6 +70,7 @@ type
   TPedidoOpf = class(specialize TdGSQLdbOpf<TPedido>)
   public
 //    constructor Create; overload;
+  property PedidoItemsOpf: TPedidoItemsOpf read PedidoItems;
   end;
 
 
