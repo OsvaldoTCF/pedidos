@@ -9,16 +9,62 @@ uses
 
 type
 
+  TTelefone = class
+   FNro: string;
+  public
+   property Nro: string read FNro write FNro;
+  end;
+
+   TTelefoneList = specialize TFPGObjectList<TTelefone>;
+
+  TCep = class
+    FCep: string;
+  public
+   property Cep: string read FCep write FCep;
+  end;
+
+  TUf = class
+    FNome: string;
+  public
+   property Nome: string read FNome write FNome;
+  end;
+
+  TCidade = class
+  FNome: string;
+  FUf: TUf;
+  public
+   property Nome: string read FNome write FNome;
+   property Uf: TUf read FUf write FUf;
+  end;
+
+  TLogradouro = class
+    FNome: string;
+    FCidade: TCidade;
+  public
+    property Nome: string read FNome write FNome;
+    property Cidade: TCidade read FCidade write FCidade;
+  end;
+
+  //  TEnderecoTipo = enumeration;
+
   TEndereco = class
-    FRua: String;
+    FLogradoura: TLogradouro;
     FNro: string;
     FComplemento: string;
+    FReferencia: string;
+    FCep: TCep;
+  public
+    property Nome: string read FNome write FNome;
+    property Cidade: TCidade read FCidade write FCidade;
   end;
+
+  TEnderecoList = specialize TFPGObjectList<TEndereco>;
 
   TPessoa = class
     FId: integer;
     FNome: string;
-    FEndereco: TEndereco;
+    FEnderecoList: TEnderecoList;
+    FTelefoneList: TTelefoneList;
   end;
 
   TCliente = class (TPessoa)
@@ -57,8 +103,6 @@ type
       property PedidoItems: TPedidoItemsList read FPedidoItems write FPedidoItems;
   end;
 
-
-
   TProdutoOpf = class(specialize TdGSQLdbOpf<TProduto>)
   public
 //    constructor Create; overload;
@@ -72,7 +116,7 @@ type
   TPedidoOpf = class(specialize TdGSQLdbOpf<TPedido>)
   public
 //    constructor Create; overload;
-  property PedidoItemsOpf: TPedidoItemsOpf read FPedidoItems;
+  // property PedidoItemsOpf: TPedidoItemsOpf read FPedidoItems;
   end;
 
 
